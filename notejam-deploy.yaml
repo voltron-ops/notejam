@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: notejam-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notejam
+  template:
+    metadata:
+      labels:
+        app: notejam
+    spec:
+      volumes:
+        - name: pv-storage
+          persistentVolumeClaim:
+            claimName: sqlite-claim
+      containers:
+        - name: notejam-con
+          image: voltronops/notejam:1.0
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: "/app/database"
+              name: pv-storage
+            
