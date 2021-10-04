@@ -24,4 +24,9 @@ spec:
           volumeMounts:
             - mountPath: "/app/database"
               name: pv-storage
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+          
             
