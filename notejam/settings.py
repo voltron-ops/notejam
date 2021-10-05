@@ -2,7 +2,7 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 PROJECT_DIR = "{}/../".format(os.path.dirname(__file__))
 
@@ -14,12 +14,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, 'database/', 'notejam.db'),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'notejam',
+        'USER': 'postgres',
+        'PASSWORD': 'halwa123',
+        'HOST': 'postgres-con',
+        'PORT': '5432',
     }
 }
 
