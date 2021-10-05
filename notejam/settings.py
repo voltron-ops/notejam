@@ -16,8 +16,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'notejam',
-        'USER': 'postgres',
-        'PASSWORD': 'halwa123',
+        'USER': 'postgres' ,
+        'PASSWORD': 'GameON123',
         'HOST': 'postgres-con',
         'PORT': '5432',
     }
