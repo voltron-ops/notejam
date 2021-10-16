@@ -31,7 +31,7 @@ docker run -d --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e P
 
     stage('Run Tests') {
       steps {
-        sh 'docker exec -it notejam-con python manage.py test'
+        sh 'docker exec  notejam-con python manage.py test'
       }
     }
 
