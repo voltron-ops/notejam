@@ -1,20 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Clone Repo') {
-      parallel {
-        stage('Clone Repo') {
-          steps {
-            git 'https://github.com/voltron-ops/notejam.git'
-          }
-        }
-
-        stage('Create Network') {
-          steps {
-            sh 'docker network create notejam'
-          }
-        }
-
+    stage('Create Network') {
+      steps {
+        sh 'docker network create notejam'
       }
     }
 
