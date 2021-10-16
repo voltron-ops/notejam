@@ -25,7 +25,7 @@ docker run -d --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e P
 
     stage('Start Notejam') {
       steps {
-        sh 'docker run -d --network notejam -p 8000:8000 --name notejam-con voltronops/notejam:${env.BUILD_NUMBER} '
+        sh 'docker run -d --network notejam -p 8000:8000 --name notejam-con voltronops/notejam:3.0'
       }
     }
 
