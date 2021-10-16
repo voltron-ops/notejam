@@ -13,7 +13,7 @@ pipeline {
 
 
 
-docker run --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e POSTGRES_DB=notejam --name postgres-con postgres:8.4.22'''
+docker run -d --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e POSTGRES_DB=notejam --name postgres-con postgres:8.4.22'''
       }
     }
 
@@ -25,7 +25,7 @@ docker run --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e POST
 
     stage('Start Notejam') {
       steps {
-        sh 'docker run --network notejam -p 8000:8000 --name notejam-con voltronops/notejam:${env.BUILD_NUMBER} '
+        sh 'docker run -d --network notejam -p 8000:8000 --name notejam-con voltronops/notejam:${env.BUILD_NUMBER} '
       }
     }
 
