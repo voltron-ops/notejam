@@ -19,7 +19,7 @@ docker run -d --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e P
 
     stage('Build Image') {
       steps {
-        sh 'docker build -t "voltronops/notejam:${env.BUILD_NUMBER}" .'
+        sh 'docker build -t voltronops/notejam:${env.BUILD_NUMBER} .'
       }
     }
 
