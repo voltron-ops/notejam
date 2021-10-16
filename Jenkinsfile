@@ -35,5 +35,15 @@ docker run -d --network notejam -p 5432:5432 -e POSTGRES_PASSWORD=GameON123 -e P
       }
     }
 
+    stage('Post Run') {
+      steps {
+        sh 'docker stop notejam-con'
+        sh 'docker stop postgres-con'
+        sh 'docker rm notejam-con'
+        sh 'docker rm postgres-con'
+        sh 'docker network remove notejam'
+      }
+    }
+
   }
 }
