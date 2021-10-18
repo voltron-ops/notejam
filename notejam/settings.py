@@ -18,7 +18,7 @@ DATABASES = {
         'NAME': 'notejam',
         'USER': 'postgres' ,
         'PASSWORD': 'GameON123',
-        'HOST': 'postgres-con',
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
