@@ -32,6 +32,11 @@ spec:
 
             - name: POSTGRES_HOST
               value: postgres-service
+              
+            - name: DATADOG_TRACE_AGENT_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
 
           livenessProbe:
             httpGet:
