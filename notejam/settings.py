@@ -70,6 +70,8 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, 'static_files/'),
 )
 
+# This is feature5 added to branch dev3(feature5/dev3)
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
