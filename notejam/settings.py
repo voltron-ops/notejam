@@ -1,5 +1,5 @@
 import os
-
+#This is feature1 for the dev1 branch.(feature1/dev1)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = []
