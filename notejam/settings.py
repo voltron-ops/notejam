@@ -5,7 +5,7 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = []
 
 PROJECT_DIR = "{}/../".format(os.path.dirname(__file__))
-
+#This is the feature2 added to dev1 branch(feature2/dev1).
 ADMINS = (
     ('Sergey Komar', 'komarserjio@gmail.com'),
 )
