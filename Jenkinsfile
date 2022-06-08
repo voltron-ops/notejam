@@ -2,8 +2,8 @@ def allowed_branches = [ "PROD" : ["main"], "QA" : ["integration"], "DEV" : [] ]
 
 properties([
     parameters([
-        gitParameter(branch: '', branchFilter: '.*', defaultValue: 'develop', description: 'Branch To Deploy, Any branch can be deployed on Dev', name: 'branch', quickFilterEnabled: true, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH_TAG'),
-        choice(name: 'env', choices: ['DEV', 'QA', 'PROD'], description: 'Deployment Envrionment' )
+  //      gitParameter(branch: '', branchFilter: '.*', defaultValue: 'develop', description: 'Branch To Deploy, Any branch can be deployed on Dev', name: 'branch', quickFilterEnabled: true, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH_TAG'),
+  //     choice(name: 'env', choices: ['DEV', 'QA', 'PROD'], description: 'Deployment Envrionment' )
     ])
 ])
 
