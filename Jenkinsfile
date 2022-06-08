@@ -10,8 +10,7 @@ properties([
 node{
     stage('Initialize'){
         def gitRepo = checkout scm
-        git_branch_path = gitRepo.GIT_BRANCH.tokenize('/')[-1]
-        git_branch = git_branch_path.take(11)
+        git_branch = gitRepo.GIT_BRANCH.tokenize('/')[-1]
         String git_short_commit_id = gitRepo.GIT_COMMIT[0..6]
         println("git_short_commit_id : "+git_short_commit_id)
         String buildTime = sh(returnStdout: true, script: "date +'%Y.%V'").trim()
