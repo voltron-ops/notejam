@@ -1,44 +1,24 @@
-pipeline{
-    agent any
-    stages{
-        stage('Checkout Source Code'){
-            steps{
-                script{
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/voltron-ops/notejam.git']]])
-                }
-            }
+def allowed_branches = [ "PROD" : ["main"], "QA" : ["integration"], "DEV" : [] ]
+
+properties([
+    parameters([
+        gitParameter(branch: '', branchFilter: '.*', defaultValue: 'develop', description: 'Branch To Deploy, Any branch can be deployed on Dev', name: 'branch', quickFilterEnabled: true, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH_TAG'),
+        choice(name: 'env', choices: ['DEV', 'QA', 'PROD'], description: 'Deployment Envrionment' )
+    ])
+])
+
+node{
+    stage('Initialize'){
+        def gitRepo = checkout scm
+        git_branch = gitRepo.GIT_BRANCH.tokenize('/')[-1]
+        String git_short_commit_id = gitRepo.GIT_COMMIT[0..6]
+        println("git_short_commit_id : "+git_short_commit_id)
+        String buildTime = sh(returnStdout: true, script: "date +'%Y.%V'").trim()
+        currentBuild.displayName = (buildTime + "." + currentBuild.number + "." + git_branch + "." + git_short_commit_id)
+        def branch_list = allowed_branches[params.env]
+        if (! branch_list.isEmpty() &&  !(git_branch in branch_list)) {
+            error "Selected '${git_branch}' branch, is not allowed to be deployed on '${params.env}' environment."
         }
-        stage('Test Source Code with Database'){
-            steps{
-                script{
-                    def postgres = docker.image('postgres').run('-e "POSTGRES_PASSWORD=GameON123" -e "POSTGRES_DB=notejam" -p 5432:5432')
-                    def notejam = docker.image('voltronops/python2').inside("--link ${postgres.id}:postgres") {
-                        sh 'python --version'
-                        sh 'python manage.py syncdb --noinput'
-                        sh 'python manage.py migrate'
-                        sh 'python manage.py test'
-                    }
-                    postgres.stop()
-                }
-            }
-        }
-        stage('Build and Push Docker Image'){
-            steps{
-                script{
-                    def customImage = docker.build("voltronops/notejam:${env.BUILD_ID}", '.')
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID' ){
-                        customImage.push()
-                    }
-                }
-            }
-        }
-    }
-    post{
-        failure{
-            sh 'docker stop $(docker ps -a -q)'
-            sh 'docker rm $(docker ps -a -q)'
-        }
+        echo "Deploying '${git_branch}' branch on ${params.env.toLowerCase()} environment."
     }
 }
-
-// This is just for testing purpose
