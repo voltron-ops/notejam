@@ -2,16 +2,16 @@ def allowed_branches = [ "PROD" : ["main"], "QA" : ["integration"], "DEV" : [] ]
 
 properties([
     parameters([
-  //      gitParameter(branch: '', branchFilter: '.*', defaultValue: 'develop', description: 'Branch To Deploy, Any branch can be deployed on Dev', name: 'branch', quickFilterEnabled: true, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH_TAG'),
-  //     choice(name: 'env', choices: ['DEV', 'QA', 'PROD'], description: 'Deployment Envrionment' )
+        gitParameter(branch: '', branchFilter: '.*', defaultValue: 'develop', description: 'Branch To Deploy, Any branch can be deployed on Dev', name: 'branch', quickFilterEnabled: true, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*', type: 'PT_BRANCH_TAG'),
+        choice(name: 'env', choices: ['DEV', 'QA', 'PROD'], description: 'Deployment Envrionment' )
     ])
 ])
 
 node{
     stage('Initialize'){
         def gitRepo = checkout scm
-//        git_branch = gitRepo.GIT_BRANCH.tokenize('/')[-1]
-  //      String git_short_commit_id = gitRepo.GIT_COMMIT[0..6]
+        git_branch = gitRepo.GIT_BRANCH.tokenize('/')[-1]
+        String git_short_commit_id = gitRepo.GIT_COMMIT[0..6]
         git_branch_path = gitRepo.GIT_BRANCH.tokenize('/')[-1]
         git_branch = git_branch_path.take(11)
         println("git_short_commit_id : "+git_short_commit_id)
