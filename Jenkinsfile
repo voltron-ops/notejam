@@ -22,7 +22,7 @@ node{
         echo "Deploying '${git_branch}' branch on ${params.env.toLowerCase()} environment."
     }
     stage('Install Packages'){
-        bat "npm install"
+        println("Instlling the packages")
     }
     stage('Build'){
         if(params.env.equals('DEV')){
@@ -31,7 +31,7 @@ node{
         if(params.env.equals('QA')){
             println("This build is for qa")
         }
-        else(params.env.equals('PROD')){
+        if(params.env.equals('PROD')){
             println("This build is for production")
         }
     }
